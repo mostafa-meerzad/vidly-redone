@@ -1,12 +1,7 @@
 const express = require("express");
-const Joi = require("joi");
 const router = express.Router();
-const mongoose = require("mongoose");
 
-const Genre = mongoose.model(
-  "Genre",
-  new mongoose.Schema({ name: { type: String, required: true } })
-);
+const {validate, Genre} = require("../models/genre");
 
 router.get("/", async (req, res) => {
   // const genres = genres.concat()
@@ -33,7 +28,7 @@ router.post("/", async (req, res) => {
   // if ok construct new genre with provided data
   // add new genre to the collection
   // return the new genre
-  const { error } = validateGenre(req.body);
+  const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   // const genre = {
@@ -54,7 +49,7 @@ router.put("/:id", async (req, res) => {
   // return the updated genre
   // const genre = genres.find((g) => parseInt(req.params.id) === g.id);
 
-  const { error } = validateGenre(req.body);
+  const { error } = validate(req.body);
 
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -88,11 +83,6 @@ router.delete("/:id", async (req, res) => {
   res.send(genre);
 });
 
-function validateGenre(name) {
-  const schema = Joi.object({
-    name: Joi.string().required().min(5),
-  });
-  return schema.validate(name);
-}
+
 
 module.exports = router;
