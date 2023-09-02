@@ -1,6 +1,7 @@
 const express = require("express");
 // const Joi = require("joi");
-const router = require("./routes/genres");
+const genreRouter = require("./routes/genres");
+const customerRouter = require("./routes/customers");
 const mongoose = require("mongoose");
 
 mongoose
@@ -10,7 +11,8 @@ mongoose
 const app = express();
 
 app.use(express.json());
-app.use("/api/genre", router)
+app.use("/api/genre", genreRouter)
+app.use("/api/customer", customerRouter)
 
 const port = process.env.PORT || 3000;
 
