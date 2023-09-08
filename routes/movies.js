@@ -5,7 +5,8 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  res.send(Movie.find().sort("name"));
+  const movies =  await Movie.find().sort("name")
+  res.send(movies)
 });
 
 router.post("/", async (req, res) => {
@@ -21,8 +22,11 @@ router.post("/", async (req, res) => {
     //more complex app it would have too many properties that we actually don't need all of it here, select and add
     // those properties that you need here
     numberInStock: req.body.numberInStock,
-    dailyRentalRate: req.body.dailyRate,
+    dailyRentalRate: req.body.dailyRentalRate,
   });
+
+  const result = await movie.save()
+  res.send(result);
 });
 
 router.get("/:id", async (req, res) => {
@@ -49,7 +53,7 @@ router.put("/:id", async (req, res) => {
     {
       title: req.body.title,
       numberInStock: req.body.numberInStock,
-      dailyRate: req.body.dailyRate,
+      dailyRate: req.body.dailyRentalRate,
     }
   );
 

@@ -2,6 +2,8 @@ const express = require("express");
 // const Joi = require("joi");
 const genreRouter = require("./routes/genres");
 const customerRouter = require("./routes/customers");
+const movie = require("./routes/movies")
+const rental = require("./routes/rentals")
 const mongoose = require("mongoose");
 
 mongoose
@@ -13,6 +15,8 @@ const app = express();
 app.use(express.json());
 app.use("/api/genre", genreRouter)
 app.use("/api/customer", customerRouter)
+app.use("/api/movie", movie)
+app.use("/api/rental", rental)
 
 const port = process.env.PORT || 3000;
 

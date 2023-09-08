@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 const Joi = require("joi")
-const genreSchema = require("./genre")
+const {genreSchema} = require("./genre")
 // instead of creating new genreSchema require the genreSchema that is already created in the genre model
 // const genreSchema = mongoose.Schema("Genre", {
 //     name: String,
