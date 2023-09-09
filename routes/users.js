@@ -32,7 +32,13 @@ router.post("/", async (req, res) =>{
     // res.send(user) // the response object contains data that you shouldn't share or send back to the user as a response
     // two solutions
     // res.send({name: user.name, email: user.email}) // pick manually
-    res.send(_.pick(user, ["name", "email"])) // use lodash
+    // res.send(_.pick(user, ["name", "email"])) // use lodash
+
+    // const token = jwt.sign({ _id: user._id }, config.get("jwtPrivateKey"));
+    // now that we have the user-token generated we need to send it to the client so they can use it to request the server in the future
+  
+    res.header("x-user-token",user.generateAuthToken()).send(_.pick(user, ["name", "email"])) // every custom-header should be prefixed by 'x-'
+    
 } )
 
 

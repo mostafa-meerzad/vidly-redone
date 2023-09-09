@@ -12,7 +12,7 @@ const auth = require("./routes/auth");
 // console.log(config.get("jwtPrivateKey"));
 // console.log(config.has("jwtPrivateKey"));
 // if(!config.has("jwtPrivateKey")) {
-if(!config.get("jwtPrivateKey")) {
+if(!config.has("jwtPrivateKey")) {
   console.error("FATAL ERROR: jwtPrivateKey is not defined")
   process.exit(1)
 }
