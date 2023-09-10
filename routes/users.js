@@ -3,6 +3,17 @@ const bcrypt = require("bcrypt");
 const {User, validate} = require("../models/user")
 const router = express.Router();
 const _ = require("lodash")
+const auth = require("../middlewares/auth")
+// if there is a need to get information about the current user in the client-side
+// if you suppose the user to send their id, it is possible that a malicious user sends the id of another user and get access to the information that they shouldn't
+// a better approach is to use the middleware and authorization and the add a property to the 'req' object and the you have access to the current user properties
+
+router.get("/me", auth,  async (req, res) => {
+    const user = await User.findById(req.user._id).select("-password") // exclude the properties that you don't want
+    res.send(user)
+
+})
+
 router.post("/", async (req, res) =>{
 
     // todo
