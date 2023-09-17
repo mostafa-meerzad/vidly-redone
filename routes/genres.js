@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const auth = require("../middlewares/auth")
 const {validate, Genre} = require("../models/genre");
-
+const admin = require("../middlewares/admin")
 router.get("/", async (req, res) => {
   // const genres = genres.concat()
   // console.log("main route");
@@ -74,13 +74,19 @@ router.delete("/:id", async (req, res) => {
   // return deleted genre
   // const genre = genres.find((g) => parseInt(req.params.id) === g.id);
 
+try{
   const genre = await Genre.findOneAndRemove({ _id: req.params.id });
 
-  if (!genre) return res.status(404).send("no genre with provided id");
-
+ 
   // const index = genres.indexOf(genre);
   // genres.splice(index, 1);
   res.send(genre);
+}
+catch(err){
+  // console.log(err)
+ res.status(404).send("no genre with provided id");
+
+}
 });
 
 

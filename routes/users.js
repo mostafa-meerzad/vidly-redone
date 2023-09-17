@@ -8,6 +8,10 @@ const auth = require("../middlewares/auth")
 // if you suppose the user to send their id, it is possible that a malicious user sends the id of another user and get access to the information that they shouldn't
 // a better approach is to use the middleware and authorization and the add a property to the 'req' object and the you have access to the current user properties
 
+
+// for logging-out you don't need a new route you just simply delete the userToken from the client side
+// note: do not store userTokens in the database
+
 router.get("/me", auth,  async (req, res) => {
     const user = await User.findById(req.user._id).select("-password") // exclude the properties that you don't want
     res.send(user)
