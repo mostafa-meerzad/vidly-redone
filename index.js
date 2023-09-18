@@ -1,5 +1,6 @@
 const express = require("express");
 // const Joi = require("joi");
+require("express-async-errors");
 const config = require("config");
 const genreRouter = require("./routes/genres");
 const customerRouter = require("./routes/customers");
