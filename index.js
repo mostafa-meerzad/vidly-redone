@@ -8,6 +8,7 @@ const rental = require("./routes/rentals")
 const users = require("./routes/users")
 const mongoose = require("mongoose");
 const auth = require("./routes/auth");
+const error = require("./middlewares/error");
 
 // console.log(config.get("jwtPrivateKey"));
 // console.log(config.has("jwtPrivateKey"));
@@ -30,6 +31,9 @@ app.use("/api/movie", movie)
 app.use("/api/rental", rental)
 app.use("/api/users", users)
 app.use("/api/auth", auth)
+
+// add error handling middleware
+app.use(error)
 
 const port = process.env.PORT || 3000;
 
