@@ -9,9 +9,11 @@ const logger = winston.createLogger({
   ]
 })
 
-module.exports = function (err, req, res, next) {
+function error (err, req, res, next) {
     // console.log(err)
     // logger.error({ message: err})
     logger.error(err, err.message);
     res.status(500).send("something failed");
   } 
+
+  module.exports = {logger, error}
