@@ -1,12 +1,13 @@
 const express = require("express");
 // const Joi = require("joi");
+const winston = require("winston");
 require("express-async-errors");
 const config = require("config");
 const genreRouter = require("./routes/genres");
 const customerRouter = require("./routes/customers");
-const movie = require("./routes/movies")
-const rental = require("./routes/rentals")
-const users = require("./routes/users")
+const movie = require("./routes/movies");
+const rental = require("./routes/rentals");
+const users = require("./routes/users");
 const mongoose = require("mongoose");
 const auth = require("./routes/auth");
 const error = require("./middlewares/error");
@@ -14,9 +15,9 @@ const error = require("./middlewares/error");
 // console.log(config.get("jwtPrivateKey"));
 // console.log(config.has("jwtPrivateKey"));
 // if(!config.has("jwtPrivateKey")) {
-if(!config.has("jwtPrivateKey")) {
-  console.error("FATAL ERROR: jwtPrivateKey is not defined")
-  process.exit(1)
+if (!config.has("jwtPrivateKey")) {
+  console.error("FATAL ERROR: jwtPrivateKey is not defined");
+  process.exit(1);
 }
 
 mongoose
@@ -26,15 +27,15 @@ mongoose
 const app = express();
 
 app.use(express.json());
-app.use("/api/genre", genreRouter)
-app.use("/api/customer", customerRouter)
-app.use("/api/movie", movie)
-app.use("/api/rental", rental)
-app.use("/api/users", users)
-app.use("/api/auth", auth)
+app.use("/api/genre", genreRouter);
+app.use("/api/customer", customerRouter);
+app.use("/api/movie", movie);
+app.use("/api/rental", rental);
+app.use("/api/users", users);
+app.use("/api/auth", auth);
 
 // add error handling middleware
-app.use(error)
+app.use(error);
 
 const port = process.env.PORT || 3000;
 
