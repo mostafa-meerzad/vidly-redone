@@ -89,7 +89,7 @@ router.put("/:id", async (req, res) => {
   res.send(genre);
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id",[auth, admin],  async (req, res) => {
   // Todo
   // look up for the genre
   // if not exist return proper error
