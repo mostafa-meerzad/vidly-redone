@@ -1,14 +1,15 @@
 const express = require("express");
 const app = express();
 const logger = require("./utils/winstonLogger");
+const e = require("express");
 
-require("./startup/config")()
 require("./startup/logging")()
+require("./startup/config")()
 require("./startup/db")()
 require("./startup/routes")(app)
 
-// throw new Error("my error")
-
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => logger.info(`server listening on port: ${port}`));
+app.listen(port, () => {
+logger.info(`server listening on port: ${port}`)
+});
